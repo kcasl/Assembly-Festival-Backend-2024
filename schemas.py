@@ -12,18 +12,22 @@ class UserLogin(BaseModel):
 
 class Stock1_SB(BaseModel):
     std_id: str
+    token: str
     stock1: int
 
 class Stock2_SB(BaseModel):
     std_id: str
+    token: str
     stock2: int
 
 class Stock3_SB(BaseModel):
     std_id: str
+    token: str
     stock3: int
 
 class Stock4_SB(BaseModel):
     std_id: str
+    token: str
     stock4: int
 
 # class UserUpdate(BaseModel):

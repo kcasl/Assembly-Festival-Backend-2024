@@ -11,7 +11,6 @@
       <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/schemas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stock_price_management.py" beforeDir="false" afterPath="$PROJECT_DIR$/stock_price_management.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +159,8 @@
       <workItem from="1726031542097" duration="6508000" />
       <workItem from="1726066312553" duration="5579000" />
       <workItem from="1726097764803" duration="2847000" />
-      <workItem from="1726103986267" duration="790000" />
+      <workItem from="1726103986267" duration="4948000" />
+      <workItem from="1726127362868" duration="1212000" />
     </task>
     <servers />
   </component>

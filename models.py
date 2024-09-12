@@ -8,6 +8,7 @@ class User(Base):
     username = Column(VARCHAR(100), unique=True, primary_key=True, nullable=False)
     password = Column(VARCHAR(100), primary_key=True, nullable=False)
     capital = Column(Double, default=0.00)
+    token = Column(VARCHAR(200))
 
 class User_Stock(Base):
     __tablename__ = 'users_stock'
