@@ -5,6 +5,7 @@ import secrets
 import crud
 import schemas
 import models
+from datetime import datetime, timedelta
 from database import engine, get_db
 from stock_price_management import *
 from starlette.middleware.cors import CORSMiddleware
@@ -23,6 +24,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+start_time = None
+timer_duration = timedelta(minutes=10)
 
 # 사용자 생성
 @app.post("/register",
@@ -118,3 +122,34 @@ def stock_price3():
 @app.get("/stock4", tags=["주가 변동 관리"])
 def stock_price4():
     return stock4_return
+
+
+@app.get("/start-timer")
+def start_timer():
+    global start_time
+    if start_time is None:
+        start_time = datetime.now()
+        return {"message": "Timer started", "remaining_time": timer_duration.total_seconds()}
+    else:
+        raise HTTPException(status_code=400, detail="Timer is already running")
+
+@app.get("/check-timer")
+def check_timer():
+    global start_time
+    if start_time is None:
+        raise HTTPException(status_code=400, detail="Timer has not been started yet")
+
+    # 현재 시간과 시작 시간의 차이를 계산하여 남은 시간 반환
+    elapsed_time = datetime.now() - start_time
+    remaining_time = timer_duration - elapsed_time
+
+    if remaining_time.total_seconds() <= 0:
+        return {"message": "종료.", "remaining_time": 0}
+
+    return int(remaining_time.total_seconds())
+
+@app.get("/reset-timer")
+def reset_timer():
+    global start_time
+    start_time = None
+    return {"message": "Timer reset"}

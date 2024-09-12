@@ -14,10 +14,15 @@ stock4_return = []
 # format = {'open' : 1, 'high' : 1, 'low' : 1, 'close' : 1}
 
 def stock_price_init(val1, val2, val3, val4):
-    stock1_price_list.clear()
-    stock2_price_list.clear()
-    stock3_price_list.clear()
-    stock4_price_list.clear()
+    if len(stock1_return) > 0:
+        stock1_price_list.clear()
+        stock2_price_list.clear()
+        stock3_price_list.clear()
+        stock4_price_list.clear()
+        stock1_return.clear()
+        stock2_return.clear()
+        stock3_return.clear()
+        stock4_return.clear()
     stock1_price_list.append(val1)
     stock1_price_list.append(stock1_price_list[-1])
     stock1_price_list.append(stock1_price_list[-1])
@@ -32,14 +37,14 @@ def stock_price_init(val1, val2, val3, val4):
     stock4_price_list.append(stock4_price_list[-1])
 
 def root_update():
-    stock1_price_update()
-    stock2_price_update()
-    stock3_price_update()
-    stock4_price_update()
-
     if len(stock1_price_list) > 100:
         return "라운드가 종료되었습니다."
-    threading.Timer(6, root_update).start()
+    else:
+        stock1_price_update()
+        stock2_price_update()
+        stock3_price_update()
+        stock4_price_update()
+        threading.Timer(6, root_update).start()
 
 def stock1_price_update():
     decision = r.randint(1,2) # 1 -> upper / 2 -> lower
@@ -54,11 +59,11 @@ def stock1_price_update():
         b = x
 
     if decision == 1:
-        a += 15
-        b += 20
+        a += 25
+        b += 30
     else:
-        a -= 20
-        b -= 15
+        a -= 27
+        b -= 21
         if a <= 0 or b <= 0:
             a += 30
             b += 40
@@ -120,8 +125,8 @@ def stock3_price_update():
         a += 15
         b += 20
     else:
-        a -= 20
-        b -= 15
+        a -= 23
+        b -= 16
         if a <= 0 or b <= 0:
             a += 30
             b += 40
@@ -149,11 +154,11 @@ def stock4_price_update():
         b = x
 
     if decision == 1:
-        a += 15
-        b += 20
+        a += 20
+        b += 25
     else:
-        a -= 20
-        b -= 15
+        a -= 23
+        b -= 17
         if a <= 0 or b <= 0:
             a += 30
             b += 40

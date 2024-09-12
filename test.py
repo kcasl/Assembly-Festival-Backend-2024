@@ -1,12 +1,24 @@
-from stock_price_management import *
+import time
+import threading
 
-val = r.randint(500,1000)
-stock_price_init(val)
+def start_timer(duration):
+    start_time = time.time()
 
-print(stock1_price_list)
+    def get_time_left():
+        elapsed_time = time.time() - start_time
+        time_left = max(0, duration - elapsed_time)
+        minutes, seconds = divmod(int(time_left), 60)
+        return f"{minutes}분 {seconds}초"
 
-for i in range(1, 900):
-    print(stock1_price_update())
+    def countdown():
+        while time.time() - start_time < duration:
+            time.sleep(1)
 
-print(stock1_price_list)
+    threading.Thread(target=countdown).start()
+    return get_time_left
+
+
+def timer():
+    get_time_left = start_timer(600)
+    return get_time_left()
 
