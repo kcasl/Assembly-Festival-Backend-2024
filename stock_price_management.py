@@ -1,3 +1,4 @@
+from articles import *
 import random as r
 import threading
 import requests
@@ -14,6 +15,8 @@ stock2_return = []
 stock3_return = []
 stock4_return = []
 
+news_return = []
+
 # format = {'open' : 1, 'high' : 1, 'low' : 1, 'close' : 1}
 
 def stock_price_init(val1, val2, val3, val4):
@@ -26,6 +29,7 @@ def stock_price_init(val1, val2, val3, val4):
         stock2_return.clear()
         stock3_return.clear()
         stock4_return.clear()
+        news_return.clear()
     stock1_price_list.append(val1)
     stock1_price_list.append(stock1_price_list[-1])
     stock1_price_list.append(stock1_price_list[-1])
@@ -42,17 +46,42 @@ def stock_price_init(val1, val2, val3, val4):
 
 
 def root_update():
-    if len(stock1_price_list) > 100:
+    if len(stock1_return) > 100:
         return "라운드가 종료되었습니다."
     else:
-        stock1_price_update()
-        stock2_price_update()
-        stock3_price_update()
-        stock4_price_update()
+        # X1, Y1, X2, Y2, X3, Y3, X4, Y4 = 0
+        w = [0,0,0,0]
+        decision = r.randint(1,2)
+        if len(stock1_return) == 20:
+            v1 = select_positive_news()
+            decision = 1
+            w[v1[1]-1] = 10*v1[2]
+            news_return.append(v1[-1])
+        elif len(stock1_return) == 40:
+            v2 = select_negative_news()
+            decision = 2
+            w[v2[1] - 1] = 10 * v2[2]
+            news_return.append(v2[-1])
+        elif len(stock1_return) == 60:
+            v3 = select_positive_news()
+            decision = 1
+            w[v3[1] - 1] = 10 * v3[2]
+            news_return.append(v3[-1])
+        elif len(stock1_return) == 80:
+            v4 = select_negative_news()
+            decision = 2
+            w[v4[1] - 1] = 10 * v4[2]
+            news_return.append(v4[-1])
+
+        stock1_price_update(decision, w[0])
+        stock2_price_update(decision, w[1])
+        stock3_price_update(decision, w[2])
+        stock4_price_update(decision, w[3])
+
         threading.Timer(6, root_update).start()
 
-def stock1_price_update():
-    decision = r.randint(1,2) # 1 -> upper / 2 -> lower
+def stock1_price_update(decision, X1):
+    # 1 -> upper / 2 -> lower
     x = stock1_price_list[-3]
     y = stock1_price_list[-1]
 
@@ -64,14 +93,14 @@ def stock1_price_update():
         b = x
 
     if decision == 1:
-        a += 25
-        b += 30
+        a += 40 + X1
+        b += 45 + X1
     else:
-        a -= 27
-        b -= 21
+        a -= 45 + X1
+        b -= 40 + X1
         if a <= 0 or b <= 0:
-            a += 30
-            b += 40
+            a += 45
+            b += 46
 
     val = r.randint(a,b)
 
@@ -83,8 +112,8 @@ def stock1_price_update():
 
     return stock1_price_list
 
-def stock2_price_update():
-    decision = r.randint(1,2) # 1 -> upper / 2 -> lower
+def stock2_price_update(decision, X2):
+    # 1 -> upper / 2 -> lower
     x = stock2_price_list[-3]
     y = stock2_price_list[-1]
 
@@ -96,14 +125,14 @@ def stock2_price_update():
         b = x
 
     if decision == 1:
-        a += 15
-        b += 20
+        a += 45 + X2
+        b += 50 + X2
     else:
-        a -= 20
-        b -= 15
+        a -= 50 + X2
+        b -= 45 + X2
         if a <= 0 or b <= 0:
-            a += 30
-            b += 40
+            a += 50
+            b += 51
 
     val = r.randint(a,b)
 
@@ -114,8 +143,8 @@ def stock2_price_update():
 
     return stock2_price_list
 
-def stock3_price_update():
-    decision = r.randint(1,2) # 1 -> upper / 2 -> lower
+def stock3_price_update(decision, X3):
+    # 1 -> upper / 2 -> lower
     x = stock3_price_list[-3]
     y = stock3_price_list[-1]
 
@@ -127,14 +156,14 @@ def stock3_price_update():
         b = x
 
     if decision == 1:
-        a += 15
-        b += 20
+        a += 50 + X3
+        b += 55 + X3
     else:
-        a -= 23
-        b -= 16
+        a -= 55 + X3
+        b -= 50 + X3
         if a <= 0 or b <= 0:
-            a += 30
-            b += 40
+            a += 55
+            b += 56
 
     val = r.randint(a,b)
 
@@ -146,8 +175,8 @@ def stock3_price_update():
 
     return stock3_price_list
 
-def stock4_price_update():
-    decision = r.randint(1,2) # 1 -> upper / 2 -> lower
+def stock4_price_update(decision, X4):
+    # 1 -> upper / 2 -> lower
     x = stock4_price_list[-3]
     y = stock4_price_list[-1]
 
@@ -159,14 +188,14 @@ def stock4_price_update():
         b = x
 
     if decision == 1:
-        a += 20
-        b += 25
+        a += 40 + X4
+        b += 45 + X4
     else:
-        a -= 23
-        b -= 17
+        a -= 45 + X4
+        b -= 40 + X4
         if a <= 0 or b <= 0:
-            a += 30
-            b += 40
+            a += 45
+            b += 46
 
     val = r.randint(a,b)
 

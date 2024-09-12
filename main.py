@@ -72,9 +72,13 @@ def update_user(user: schemas.Info, db: Session = Depends(get_db)):
          tags=["주가 변동 관리"],
          summary="매 라운드 시작할 때 호출할 것. 주식 정보 초기화.")
 def stock_init():
-    stock_price_init(r.randint(500,700), r.randint(50,70), r.randint(100,200), r.randint(800, 1100))
+    stock_price_init(r.randint(300,400), r.randint(400, 500), r.randint(600,700), r.randint(300, 500))
     root_update()
     return "초기화 및 그래프 시작 성공."
+
+@app.get("/get_news")
+def get_news():
+    return news_return[-1]
 
 @app.post("/buy_stock1", tags=["매도 / 매수"])
 def buy_stock1(user: schemas.Stock1_SB, db: Session = Depends(get_db)):
