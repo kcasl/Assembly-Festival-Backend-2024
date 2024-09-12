@@ -44,9 +44,9 @@ def read_user(user: schemas.UserLogin, db: Session = Depends(get_db)):
 @app.put("/update_capital/{std_id}",
          tags=["계정 관리"],
          summary="자본 정보 업데이트. -> 주식 수 * 해당 주식 가격")
-def update_user(std_id: str, user: schemas.UserUpdate, db: Session = Depends(get_db)):
+def update_user(std_id: str, db: Session = Depends(get_db)):
     try:
-        db_user = crud.update_user(db, std_id, user)
+        db_user = crud.update_user(db, std_id)
         return db_user
     except Exception as e:
         return f"계정 정보가 존재하지 않습니다. 관리자에게 문의해주세요. err : {e}"
@@ -57,6 +57,15 @@ def update_user(std_id: str, user: schemas.UserUpdate, db: Session = Depends(get
 def stock_init():
     stock_price_init(r.randint(500,700), r.randint(50,70), r.randint(100,200), r.randint(800, 1100))
     return "초기화 성공."
+
+@app.post("/buy_stock1", tags=["매도 / 매수"])
+def buy_stock1(user: schemas.Stock1_SB, db: Session = Depends(get_db)):
+    return crud.buy_stock1c(db, user)
+
+@app.post("/sell_stock1", tags=["매도 / 매수"])
+def sell_stock1(user: schemas.Stock1_SB, db: Session = Depends(get_db)):
+    return crud.sell_stock1c(db, user)
+
 
 @app.get("/stock1", tags=["주가 변동 관리"])
 def stock_price1():

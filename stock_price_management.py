@@ -48,7 +48,7 @@ def stock1_price_update():
 
     stock1_price_list.append(val)
 
-    return val
+    return stock1_price_list
 
 def stock2_price_update():
     decision = r.randint(1,2) # 1 -> upper / 2 -> lower
@@ -76,7 +76,7 @@ def stock2_price_update():
 
     stock2_price_list.append(val)
 
-    return val
+    return stock2_price_list
 
 def stock3_price_update():
     decision = r.randint(1,2) # 1 -> upper / 2 -> lower
@@ -104,7 +104,7 @@ def stock3_price_update():
 
     stock3_price_list.append(val)
 
-    return val
+    return stock3_price_list
 
 def stock4_price_update():
     decision = r.randint(1,2) # 1 -> upper / 2 -> lower
@@ -132,4 +132,4 @@ def stock4_price_update():
 
     stock4_price_list.append(val)
 
-    return val
+    return stock4_price_list
