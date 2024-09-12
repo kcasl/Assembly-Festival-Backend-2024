@@ -1,18 +1,28 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 import random as r
-import json
 import secrets
 import crud
 import schemas
 import models
 from database import engine, get_db
 from stock_price_management import *
+from starlette.middleware.cors import CORSMiddleware
 
 # 모델 생성
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # 사용자 생성
 @app.post("/register",
