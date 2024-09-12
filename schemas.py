@@ -10,6 +10,9 @@ class UserLogin(BaseModel):
     std_id: str
     password: str
 
+class Info(BaseModel):
+    std_id: str
+
 class Stock1_SB(BaseModel):
     std_id: str
     token: str

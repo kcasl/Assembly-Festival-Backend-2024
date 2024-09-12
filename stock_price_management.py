@@ -1,5 +1,8 @@
 import random as r
 import threading
+import requests
+
+url = "http://127.0.0.1:8000/start-timer"
 
 stock1_price_list = []
 stock2_price_list = []
@@ -35,6 +38,8 @@ def stock_price_init(val1, val2, val3, val4):
     stock4_price_list.append(val4)
     stock4_price_list.append(stock4_price_list[-1])
     stock4_price_list.append(stock4_price_list[-1])
+    res = requests.get(url)
+
 
 def root_update():
     if len(stock1_price_list) > 100:

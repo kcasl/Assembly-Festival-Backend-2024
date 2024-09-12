@@ -25,17 +25,32 @@ def update_user(db: Session, std_id: str):
     db_user = db.query(models.User).filter(models.User.std_id == std_id).first()
     db_stock = db.query(models.User_Stock).filter(models.User_Stock.std_id == std_id).first()
     if db_user and db_stock:
-        db_user.capital = (
-            db_user.capital + #기본 자금
-            db_stock.stock1 * stock1_price_list[-1] + # 주식 1 가격 합
-            db_stock.stock2 * stock2_price_list[-1] + # 주식 2 가격 합
-            db_stock.stock3 * stock3_price_list[-1] + # 주식 3 가격 합
-            db_stock.stock4 * stock4_price_list[-1]   # 주식 4 가격 합
-        )
-        db.commit()
-        db.refresh(db_user)
-        db.refresh(db_stock)
-    return db_user
+        if len(stock1_price_list) > 0:
+            total_capital = (
+                db_user.capital + #기본 자금
+                db_stock.stock1 * stock1_price_list[-1] + # 주식 1 가격 합
+                db_stock.stock2 * stock2_price_list[-1] + # 주식 2 가격 합
+                db_stock.stock3 * stock3_price_list[-1] + # 주식 3 가격 합
+                db_stock.stock4 * stock4_price_list[-1]   # 주식 4 가격 합
+            )
+        else:
+            total_capital = db_user.capital
+        now_capital = db_user.capital
+        total_stock1 = db_stock.stock1
+        total_stock2 = db_stock.stock2
+        total_stock3 = db_stock.stock3
+        total_stock4 = db_stock.stock4
+
+        info = {
+            'total_capital': total_capital,
+            'capital': now_capital,
+            'stock1': total_stock1,
+            'stock2': total_stock2,
+            'stock3': total_stock3,
+            'stock4': total_stock4
+        }
+
+    return info
 
 # 사용자 조회
 def get_user(db: Session, std_id: str):
@@ -46,7 +61,7 @@ def save_token(db: Session, std_id: str, token: str):
     db_user.token = token
     db.commit()
     db.refresh(db_user)
-    return db_user
+    return token
 
 
 def buy_stock1c(db: Session, user: schemas.Stock1_SB):

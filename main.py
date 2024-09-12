@@ -50,20 +50,21 @@ def read_user(user: schemas.UserLogin, db: Session = Depends(get_db)):
 
         if user.password == db_user.password:
             token = secrets.token_urlsafe(16)
-            return crud.save_token(db, user.std_id, token)
+            info = crud.update_user(db, user.std_id)
+            return [crud.save_token(db, user.std_id, token),info]
         else:
             return "비밀번호가 틀립니다. 다시 시도해주세요."
     except Exception as e:
         return f"계정 정보가 존재하지 않습니다. 회원가입 후 이용해주세요. err : {e}"
 
 # 사용자 정보 업데이트
-@app.put("/update_capital/{std_id}",
+@app.post("/update_capital",
          tags=["계정 관리"],
          summary="자본 정보 업데이트. -> 주식 수 * 해당 주식 가격")
-def update_user(std_id: str, db: Session = Depends(get_db)):
+def update_user(user: schemas.Info, db: Session = Depends(get_db)):
     try:
-        db_user = crud.update_user(db, std_id)
-        return db_user
+        info = crud.update_user(db, user.std_id)
+        return info
     except Exception as e:
         return f"계정 정보가 존재하지 않습니다. 관리자에게 문의해주세요. err : {e}"
 
@@ -139,7 +140,6 @@ def check_timer():
     if start_time is None:
         raise HTTPException(status_code=400, detail="Timer has not been started yet")
 
-    # 현재 시간과 시작 시간의 차이를 계산하여 남은 시간 반환
     elapsed_time = datetime.now() - start_time
     remaining_time = timer_duration - elapsed_time
 
