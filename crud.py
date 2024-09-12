@@ -61,7 +61,7 @@ def save_token(db: Session, std_id: str, token: str):
     db_user.token = token
     db.commit()
     db.refresh(db_user)
-    return token
+    return db_user
 
 
 def buy_stock1c(db: Session, user: schemas.Stock1_SB):
