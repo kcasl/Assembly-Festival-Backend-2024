@@ -125,8 +125,8 @@ def stock1_price_update(decision, X1):
         b = x
 
     if decision == 1:
-        a += 40 + X1
-        b += 45 + X1
+        a += 30 + X1
+        b += 35 + X1
     else:
         a -= 55 + X1
         b -= 50 + X1
@@ -157,8 +157,8 @@ def stock2_price_update(decision, X2):
         b = x
 
     if decision == 1:
-        a += 45 + X2
-        b += 50 + X2
+        a += 30 + X2
+        b += 35 + X2
     else:
         a -= 55 + X2
         b -= 50 + X2
@@ -188,8 +188,8 @@ def stock3_price_update(decision, X3):
         b = x
 
     if decision == 1:
-        a += 50 + X3
-        b += 55 + X3
+        a += 30 + X3
+        b += 35 + X3
     else:
         a -= 60 + X3
         b -= 55 + X3
@@ -220,8 +220,8 @@ def stock4_price_update(decision, X4):
         b = x
 
     if decision == 1:
-        a += 40 + X4
-        b += 45 + X4
+        a += 30 + X4
+        b += 35 + X4
     else:
         a -= 50 + X4
         b -= 55 + X4
