@@ -73,6 +73,9 @@ def root_update():
             w[v4[1] - 1] = 10 * v4[2]
             news_return.append(v4[-1])
 
+        else:
+            decision = r.randint(1, 2)
+
         stock1_price_update(decision, w[0])
         stock2_price_update(decision, w[1])
         stock3_price_update(decision, w[2])
