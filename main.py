@@ -58,6 +58,19 @@ def read_user(user: schemas.UserLogin, db: Session = Depends(get_db)):
         return f"계정 정보가 존재하지 않습니다. 회원가입 후 이용해주세요. err : {e}"
 
 # 사용자 정보 업데이트
+
+@app.post("/put_money")
+def put_moeny(user: schemas.Money, db: Session = Depends(get_db)):
+    try:
+        dt = db.query(models.User).filter(models.User.std_id == user.std_id).first()
+        dt.capital += user.capital
+        db.commit()
+        db.refresh(dt)
+        return dt.capital
+    except Exception as e:
+        return f"계정 정보가 존재하지 않습니다. 관리자에게 문의해주세요. err : {e}"
+
+
 @app.post("/update_capital",
          tags=["계정 관리"],
          summary="자본 정보 업데이트. -> 주식 수 * 해당 주식 가격")

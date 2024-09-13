@@ -13,6 +13,10 @@ class UserLogin(BaseModel):
 class Info(BaseModel):
     std_id: str
 
+class Money(BaseModel):
+    std_id: str
+    capital: float
+
 class Stock1_SB(BaseModel):
     std_id: str
     token: str
