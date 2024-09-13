@@ -73,7 +73,7 @@ def buy_stock1c(db: Session, user: schemas.Stock1_SB):
             return "매수를 위한 자금이 부족합니다. 게임머니를 충전해주세요."
         else:
             db_user.capital = update_capital
-            db_stock.stock1 = user.stock1
+            db_stock.stock1 += user.stock1
 
             db.commit()
 
@@ -112,7 +112,7 @@ def buy_stock2c(db: Session, user: schemas.Stock2_SB):
             return "매수를 위한 자금이 부족합니다. 게임머니를 충전해주세요."
         else:
             db_user.capital = update_capital
-            db_stock.stock2 = user.stock2
+            db_stock.stock2 += user.stock2
 
             db.commit()
 
@@ -151,7 +151,7 @@ def buy_stock3c(db: Session, user: schemas.Stock3_SB):
             return "매수를 위한 자금이 부족합니다. 게임머니를 충전해주세요."
         else:
             db_user.capital = update_capital
-            db_stock.stock3 = user.stock3
+            db_stock.stock3 += user.stock3
 
             db.commit()
 
@@ -190,7 +190,7 @@ def buy_stock4c(db: Session, user: schemas.Stock4_SB):
             return "매수를 위한 자금이 부족합니다. 게임머니를 충전해주세요."
         else:
             db_user.capital = update_capital
-            db_stock.stock4 = user.stock4
+            db_stock.stock4 += user.stock4
 
             db.commit()
 
