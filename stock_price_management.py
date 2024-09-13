@@ -128,11 +128,11 @@ def stock1_price_update(decision, X1):
         a += 40 + X1
         b += 45 + X1
     else:
-        a -= 45 + X1
-        b -= 40 + X1
+        a -= 55 + X1
+        b -= 50 + X1
         if a <= 0 or b <= 0:
-            a += 45
-            b += 46
+            a += 55
+            b += 56
 
     val = r.randint(a,b)
 
@@ -160,11 +160,11 @@ def stock2_price_update(decision, X2):
         a += 45 + X2
         b += 50 + X2
     else:
-        a -= 50 + X2
-        b -= 45 + X2
+        a -= 55 + X2
+        b -= 50 + X2
         if a <= 0 or b <= 0:
-            a += 50
-            b += 51
+            a += 55
+            b += 56
 
     val = r.randint(a,b)
 
@@ -191,11 +191,11 @@ def stock3_price_update(decision, X3):
         a += 50 + X3
         b += 55 + X3
     else:
-        a -= 55 + X3
-        b -= 50 + X3
+        a -= 60 + X3
+        b -= 55 + X3
         if a <= 0 or b <= 0:
-            a += 55
-            b += 56
+            a += 60
+            b += 61
 
     val = r.randint(a,b)
 
@@ -223,11 +223,11 @@ def stock4_price_update(decision, X4):
         a += 40 + X4
         b += 45 + X4
     else:
-        a -= 45 + X4
-        b -= 40 + X4
+        a -= 50 + X4
+        b -= 55 + X4
         if a <= 0 or b <= 0:
-            a += 45
-            b += 46
+            a += 55
+            b += 56
 
     val = r.randint(a,b)
 
