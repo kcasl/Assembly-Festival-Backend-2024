@@ -66,7 +66,7 @@ def root_update():
                 decision3 = 1
             elif v1[1] == 4:
                 decision4 = 1
-            w[v1[1]-1] = 10*v1[2]
+            w[v1[1]-1] = 6*v1[2]
             news_return.append(v1[-1])
         elif len(stock1_return) == 40:
             v2 = select_negative_news()
@@ -78,7 +78,7 @@ def root_update():
                 decision3 = 1
             elif v2[1] == 4:
                 decision4 = 1
-            w[v2[1] - 1] = 10 * v2[2]
+            w[v2[1] - 1] = 6 * v2[2]
             news_return.append(v2[-1])
         elif len(stock1_return) == 60:
             v3 = select_positive_news()
@@ -90,7 +90,7 @@ def root_update():
                 decision3 = 1
             elif v3[1] == 4:
                 decision4 = 1
-            w[v3[1] - 1] = 10 * v3[2]
+            w[v3[1] - 1] = 6 * v3[2]
             news_return.append(v3[-1])
         elif len(stock1_return) == 80:
             v4 = select_negative_news()
@@ -102,7 +102,7 @@ def root_update():
                 decision3 = 1
             elif v4[1] == 4:
                 decision4 = 1
-            w[v4[1] - 1] = 10 * v4[2]
+            w[v4[1] - 1] = 6 * v4[2]
             news_return.append(v4[-1])
 
         stock1_price_update(decision1, w[0])
