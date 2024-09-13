@@ -48,38 +48,67 @@ def stock_price_init(val1, val2, val3, val4):
 def root_update():
     if len(stock1_return) > 100:
         return "라운드가 종료되었습니다."
+
     else:
+        decision1 = r.randint(1, 2)
+        decision2 = r.randint(1, 2)
+        decision3 = r.randint(1, 2)
+        decision4 = r.randint(1, 2)
         # X1, Y1, X2, Y2, X3, Y3, X4, Y4 = 0
         w = [0,0,0,0]
-        decision = r.randint(1,2)
         if len(stock1_return) == 20:
             v1 = select_positive_news()
-            decision = 1
+            if v1[1] == 1:
+                decision1 = 1
+            elif v1[1] == 2:
+                decision2 = 1
+            elif v1[1] == 3:
+                decision3 = 1
+            elif v1[1] == 4:
+                decision4 = 1
             w[v1[1]-1] = 10*v1[2]
             news_return.append(v1[-1])
         elif len(stock1_return) == 40:
             v2 = select_negative_news()
-            decision = 2
+            if v2[1] == 1:
+                decision1 = 1
+            elif v2[1] == 2:
+                decision2 = 1
+            elif v2[1] == 3:
+                decision3 = 1
+            elif v2[1] == 4:
+                decision4 = 1
             w[v2[1] - 1] = 10 * v2[2]
             news_return.append(v2[-1])
         elif len(stock1_return) == 60:
             v3 = select_positive_news()
-            decision = 1
+            if v3[1] == 1:
+                decision1 = 1
+            elif v3[1] == 2:
+                decision2 = 1
+            elif v3[1] == 3:
+                decision3 = 1
+            elif v3[1] == 4:
+                decision4 = 1
             w[v3[1] - 1] = 10 * v3[2]
             news_return.append(v3[-1])
         elif len(stock1_return) == 80:
             v4 = select_negative_news()
-            decision = 2
+            if v4[1] == 1:
+                decision1 = 1
+            elif v4[1] == 2:
+                decision2 = 1
+            elif v4[1] == 3:
+                decision3 = 1
+            elif v4[1] == 4:
+                decision4 = 1
             w[v4[1] - 1] = 10 * v4[2]
             news_return.append(v4[-1])
 
-        else:
-            decision = r.randint(1, 2)
-
-        stock1_price_update(decision, w[0])
-        stock2_price_update(decision, w[1])
-        stock3_price_update(decision, w[2])
-        stock4_price_update(decision, w[3])
+        stock1_price_update(decision1, w[0])
+        stock2_price_update(decision2, w[1])
+        stock3_price_update(decision3, w[2])
+        stock4_price_update(decision4, w[3])
 
         threading.Timer(6, root_update).start()
 
